@@ -14,18 +14,20 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('password');
             $table->string('position');
             $table->string('skill')->nullable();
-            $table->string('phone');
-            $table->string('address');
-            $table->string('description')->nullable();
-            $table->integer('status');
+            $table->string('phone',15);
+            $table->string('address')->nullable();
+            $table->text('description')->nullable();
+            $table->integer('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });
     }
+
+   
 
     /**
      * Reverse the migrations.

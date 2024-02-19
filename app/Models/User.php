@@ -4,13 +4,14 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable,SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -21,7 +22,34 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'position',
+        'skill',
+        'phone',
+        'address',
+        'description',
+        'status',
     ];
+
+    public const STATUS_RADIO = [
+        '1'=> 'Pending',
+        '2'=> 'Accepted',
+        '3'=> 'Banned',
+    ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function experiences()
+    {
+        return $this->hasMany(Experience::class);
+    }
+    
+    public function education()
+    {
+        return $this->hasMany(Education::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
