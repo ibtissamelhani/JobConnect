@@ -39,8 +39,10 @@ class Offer extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+
+        $this->belongsToMany(User::class);
     }
+    
 
 
 }
