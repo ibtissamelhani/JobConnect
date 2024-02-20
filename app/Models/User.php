@@ -41,6 +41,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
+    public function offers()
+    {
+        return $this->belongsToMany(Offer::class);
+    }
+
     public function experiences()
     {
         return $this->hasMany(Experience::class);
