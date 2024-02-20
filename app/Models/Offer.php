@@ -20,7 +20,7 @@ class Offer extends Model
         'agent_id'
     ];
 
-    protected $status=[
+    public const STATUS=[
         1 => 'pending',
         2 => 'sent',
     ];
@@ -39,7 +39,6 @@ class Offer extends Model
 
     public function users()
     {
-
         $this->belongsToMany(User::class);
     }
     
