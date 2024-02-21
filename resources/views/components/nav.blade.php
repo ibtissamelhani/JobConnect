@@ -12,7 +12,9 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-        <script src="https://cdn.tiny.cloud/1/26artulvl8oglywy8p940wf734qi8yvj06uiek9s725ld2wt/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>   
+        <script src="https://cdn.tiny.cloud/1/26artulvl8oglywy8p940wf734qi8yvj06uiek9s725ld2wt/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script> 
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>  
                 <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body class="antialiased">
