@@ -15,11 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('contract');
-            $table->string('description');
-            $table->string('salary');
+            $table->integer('min_salary');
+            $table->integer('max_salary');
+            $table->integer('duration');
+            $table->string('period');
             $table->string('experience');
+            $table->string('description');
             $table->integer('status')->default(1);
             $table->foreignId('agent_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('city_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('domain_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

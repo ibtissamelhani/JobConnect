@@ -10,14 +10,18 @@ class Offer extends Model
     use HasFactory;
 
     protected $fillable=[
-        
         'title',
         'contract',
-        'description',
-        'salary',
+        'min_salary',
+        'max_salary',
+        'duration',
+        'period',
         'experience',
+        'description',
         'status',
-        'agent_id'
+        'agent_id',
+        'city_id',
+        'domain_id'
     ];
 
     public const STATUS=[
