@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Agent;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreOfferRequest;
+use App\Models\City;
+use App\Models\Domain;
+use App\Models\Offer;
 use Illuminate\Http\Request;
 
 class OfferController extends Controller
@@ -20,15 +24,23 @@ class OfferController extends Controller
      */
     public function create()
     {
-        return view('Agent.offer.create');
+        $cities = City::all();
+        $domains = Domain::all();
+        return view('Agent.offer.create',compact('cities','domains'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreOfferRequest $request)
     {
-        //
+        try{
+            $offer = Offer::create($request->all());
+            return redirect()->route('')->with('success', 'offer created successfully.'); 
+        }
+        catch(\Exception $e){
+            return redirect()->back()->with('error', 'An error occurred while processing your request.');
+        }
     }
 
     /**
