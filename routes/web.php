@@ -1,6 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CityController as AdminCityController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DomainController as AdminDomainController;
+use App\Http\Controllers\Admin\OfferController as AdminOfferController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,8 +33,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//admine testing
 
-Route::get('/dash',[AdminController::class,'index'])->name('admin.index');
+////////// Admine routes /////////////////////////////////////////////////////////////////
+
+Route::prefix('admin')->name('admin.')->group(function(){
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('index');
+    Route::get('/users',[AdminUserController::class,'index'])->name('users.index');
+    Route::get('/offers',[AdminOfferController::class,'index'])->name('offers.index');
+    Route::get('/cities',[AdminCityController::class,'index'])->name('cities.index');
+    Route::get('/domains',[AdminDomainController::class,'index'])->name('domains.index');
+});
 
 require __DIR__.'/auth.php';

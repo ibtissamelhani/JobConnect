@@ -21,7 +21,7 @@
                                 <!-- LOGO -->
                                 <a class="flex items-center text-white space-x-4" href="">
                                     <svg class="w-7 h-7 bg-indigo-600 rounded-lg p-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-                                    <span class="text-2xl font-bold">Better Code</span>
+                                    <span class="text-2xl font-bold">JobConnect</span>
                                 </a>
             
                                 <!-- SEARCH BAR -->
@@ -55,16 +55,16 @@
                                             <svg x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>    
                                         </div>
                                         <div x-show="open" class="text-sm border-l-2 border-gray-800 mx-6 my-2.5 px-2.5 flex flex-col gap-y-1">
-                                            <a href="#" class="block py-2 px-4 hover:bg-gray-800 hover:text-white rounded">
+                                            <a href="{{route('admin.users.index')}}" class="block py-2 px-4 hover:bg-gray-800 hover:text-white rounded">
                                                 Users
                                             </a>
-                                            <a href="#" class="block py-2 px-4 hover:bg-gray-800 hover:text-white rounded">
+                                            <a href="{{route('admin.offers.index')}}" class="block py-2 px-4 hover:bg-gray-800 hover:text-white rounded">
                                                 Job offers
                                             </a>
-                                            <a href="#" class="block py-2 px-4 hover:bg-gray-800 hover:text-white rounded">
+                                            <a href="{{route('admin.cities.index')}}" class="block py-2 px-4 hover:bg-gray-800 hover:text-white rounded">
                                                 Cities
                                             </a>
-                                            <a href="#" class="block py-2 px-4 hover:bg-gray-800 hover:text-white rounded">
+                                            <a href="{{route('admin.domains.index')}}" class="block py-2 px-4 hover:bg-gray-800 hover:text-white rounded">
                                                 Domains
                                             </a>
                                         </div>
