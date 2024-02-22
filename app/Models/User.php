@@ -61,11 +61,6 @@ class User extends Authenticatable implements HasMedia
         return $this->belongsToMany(Role::class);
     }
 
-    public function offers()
-    {
-        return $this->belongsToMany(Offer::class);
-    }
-
     public function experiences()
     {
         return $this->hasMany(Experience::class);
@@ -74,6 +69,11 @@ class User extends Authenticatable implements HasMedia
     public function education()
     {
         return $this->hasMany(Education::class);
+    }
+
+    public function offers()
+    {
+        return $this->belongsToMany(Offer::class);
     }
 
     public function company()
