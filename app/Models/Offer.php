@@ -10,14 +10,18 @@ class Offer extends Model
     use HasFactory;
 
     protected $fillable=[
-        
         'title',
         'contract',
-        'description',
-        'salary',
+        'min_salary',
+        'max_salary',
+        'duration',
+        'period',
         'experience',
+        'description',
         'status',
-        'agent_id'
+        'user_id',
+        'city_id',
+        'domain_id'
     ];
 
     public const STATUS=[
@@ -26,20 +30,20 @@ class Offer extends Model
     ];
 
     public function agent(){
-        $this->belongsTo(Agent::class);
+       return $this->belongsTo(User::class);
     }
 
     public function domain(){
-        $this->belongsTo(Domain::class);
+        return $this->belongsTo(Domain::class);
     }
 
     public function city(){
-        $this->belongsTo(City::class);
+        return $this->belongsTo(City::class);
     }
 
     public function users()
     {
-        $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class);
     }
     
 

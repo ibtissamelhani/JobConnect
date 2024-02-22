@@ -66,6 +66,11 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(Education::class);
     }
 
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

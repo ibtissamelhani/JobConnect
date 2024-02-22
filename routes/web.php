@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\OfferController as AdminOfferController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Agent\OfferController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// agent route 
+
+Route::prefix('agent')->name('agent.')->group(function () {
+    Route::resource('offers', OfferController::class);
+});
+
 
 
 ////////// Admine routes /////////////////////////////////////////////////////////////////

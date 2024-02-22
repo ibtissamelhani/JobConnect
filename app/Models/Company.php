@@ -18,4 +18,9 @@ class Company extends Model implements HasMedia
         'adress',
         'field',
     ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }
