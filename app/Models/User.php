@@ -30,6 +30,7 @@ class User extends Authenticatable implements HasMedia
         'address',
         'description',
         'status',
+        'company_id',
     ];
 
     public const STATUS_RADIO = [
@@ -37,6 +38,15 @@ class User extends Authenticatable implements HasMedia
         '2'=> 'Accepted',
         '3'=> 'Banned',
     ];
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public static function updateCompanyId($id, $newCompanyId){
+        $user = User::findOrFail($id);
+        $user->company_id = $newCompanyId;
+        $user->save();
+    }
 
 
     // method to return the status

@@ -16,7 +16,7 @@ class OfferController extends Controller
      */
     public function index()
     {
-        $offers = Offer::all();
+        $offers = Offer::latest()->get();
         return view('welcome', compact('offers'));
     }
 
