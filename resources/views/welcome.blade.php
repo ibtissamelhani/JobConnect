@@ -112,8 +112,13 @@
                                    
                                 </ul>
                                 <div class="py-2">
-                                    <a href="#"
-                                        class="block px-4 py-2 text-md font-semibold text-red-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete offer</a>
+                                    <form action="{{ route('agent.offers.destroy', $offer->id) }}" method="post" class="hover:bg-gray-100">
+                                        @method('delete')
+                                        @csrf
+                                        <button class="block px-4 py-2 text-md font-semibold text-red-700  dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                            Delete offer
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

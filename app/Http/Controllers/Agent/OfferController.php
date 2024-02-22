@@ -70,8 +70,9 @@ class OfferController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Offer $offer)
     {
-        //
+        $offer->delete();
+        return redirect()->route('agent.offers.index');
     }
 }
