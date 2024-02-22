@@ -38,6 +38,14 @@ class User extends Authenticatable implements HasMedia
         '3'=> 'Banned',
     ];
 
+
+    // method to return the status
+
+    public function getStatus(){
+        return self::STATUS_RADIO[$this->status];
+    }
+
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);

@@ -62,31 +62,34 @@
         </div>
         <!-- END OF STATISTICS -->
 
+          {{-- Add button --}}
+        <div class="flex justify-end">
+            <a href="{{route('admin.cities.create')}}">
+            <button type="button" class="flex items-center justify-center text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"> 
+                <span>Add</span>
+                <svg class="w-5 h-5 ml-2 align-baseline" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 5v14M5 12h14"/>
+                </svg>
+            </button>
+        </a>
+        </div>
+        
         {{-- table component --}}
-        <x-admin.table :headers="['Id'=>'text-left','Name'=>'text-left','Action'=>'text-center']" >
+        <x-admin.table :headers="['Id'=>'text-left','Name'=>'text-center','Action'=>'text-center']" >
 
+            @foreach($cities as $city)
 
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
                         
         <td class="py-3 px-6 text-left whitespace-nowrap">
-                Reactjs
+             {{$city->id}}
             </div>
         </td>
         
-        <td class="py-3 px-6 text-left">
-            <div class="flex items-center">
-                <div class="mr-2">
-                    <img class="w-6 h-6 rounded-full" src="https://randomuser.me/api/portraits/men/1.jpg"/>
-                </div>
-                <span>Eshal Rosas</span>
-            </div>
-        </td>
         <td class="py-3 px-6 text-center">
-            22
+           {{$city->name}}
         </td>
-        <td class="py-3 px-6 text-center">
-            <span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">Active</span>
-        </td>
+     
         <td class="py-3 px-6 text-center">
             <div class="flex item-center justify-center">
                 <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer cursor-pointer">
@@ -96,19 +99,26 @@
                     </svg>
                 </div>
                 <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                     </svg>
                 </div>
-                <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                    </svg>
-                </div>
+                
+                <form action="{{ route('admin.cities.destroy', ['city' => $city->id]) }}" method="POST">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit" class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer cursor-pointer" aria-label="Delete City">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /> 
+                        </svg>
+                    </button>
+                </form>
+
             </div>
         </td>
     </tr>
 
+    @endforeach
 
    
     </x-admin.table>   

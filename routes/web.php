@@ -37,11 +37,32 @@ Route::middleware('auth')->group(function () {
 ////////// Admine routes /////////////////////////////////////////////////////////////////
 
 Route::prefix('admin')->name('admin.')->group(function(){
+
+    // display index pages
+
     Route::get('/dashboard',[DashboardController::class,'index'])->name('index');
     Route::get('/users',[AdminUserController::class,'index'])->name('users.index');
     Route::get('/offers',[AdminOfferController::class,'index'])->name('offers.index');
     Route::get('/cities',[AdminCityController::class,'index'])->name('cities.index');
     Route::get('/domains',[AdminDomainController::class,'index'])->name('domains.index');
+
+    // Creating cities
+
+    Route::get('/cities/create',[AdminCityController::class,'create'])->name('cities.create');
+    Route::post('/cities/store',[AdminCityController::class,'store'])->name('cities.store');
+
+    //Creating domains
+
+    Route::get('/domains/create',[AdminDomainController::class,'create']) -> name('domains.create');
+    Route::post('/domains/store',[AdminDomainController::class,'store']) ->name('domains.store');
+
+    // delete city
+    Route::delete('cities/delete/{city}',[AdminCityController::class,'destroy'])->name('cities.destroy');
+
+    // delete domain
+    Route::delete('domains/delete/{domain}',[AdminDomainController::class,'destroy'])->name('domains.destroy');
+
+
 });
 
 require __DIR__.'/auth.php';
