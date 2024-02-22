@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
 // agent route 
 
 Route::prefix('agent')->name('agent.')->group(function () {
-    Route::resource('agent/offers', OfferController::class);
+    Route::resource('offers', OfferController::class);
 });
 
 

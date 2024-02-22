@@ -19,7 +19,7 @@ class Offer extends Model
         'experience',
         'description',
         'status',
-        'agent_id',
+        'user_id',
         'city_id',
         'domain_id'
     ];
@@ -30,7 +30,7 @@ class Offer extends Model
     ];
 
     public function agent(){
-        $this->belongsTo(Agent::class);
+        $this->belongsTo(User::class);
     }
 
     public function domain(){

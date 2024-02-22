@@ -34,13 +34,8 @@ class OfferController extends Controller
      */
     public function store(StoreOfferRequest $request)
     {
-        try{
-            $offer = Offer::create($request->all());
-            return redirect()->route('')->with('success', 'offer created successfully.'); 
-        }
-        catch(\Exception $e){
-            return redirect()->back()->with('error', 'An error occurred while processing your request.');
-        }
+            Offer::create($request->all());
+            return redirect()->route('agent.offers.create')->with('success', 'offer created successfully.'); 
     }
 
     /**

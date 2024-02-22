@@ -11,7 +11,7 @@ class StoreOfferRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -31,8 +31,7 @@ class StoreOfferRequest extends FormRequest
             'period' => 'required|string|max:255',
             'experience' => 'required|string|max:255',
             'description' => 'required|string',
-            'status' => 'required|integer|in:0,1',
-            'agent_id' => 'required|exists:agents,id',
+            'user_id' => 'required|exists:users,id',
             'city_id' => 'required|exists:cities,id',
             'domain_id' => 'required|exists:domains,id',
         ];

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('experience');
             $table->string('description');
             $table->integer('status')->default(1);
-            $table->foreignId('agent_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('city_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('domain_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->softDeletes();
