@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CityRequest;
+use App\Models\City;
 use Illuminate\Http\Request;
 
 class CityController extends Controller
@@ -11,6 +13,21 @@ class CityController extends Controller
     // View the cities table
 
     public function index(){
-        return view('admin.cities.index');
+        $cities=City::all();
+        return view('admin.cities.index',compact('cities'));
+    }
+
+    public function create(){
+        return view('admin.cities.create');
+    }
+
+    public function store(CityRequest $request){
+        City::create($request->all());
+        return redirect()->route('admin.cities.index');
+    }
+
+    public function destroy(City $city){
+        $city->delete();
+        return redirect()->route('admin.cities.index');
     }
 }
