@@ -16,7 +16,8 @@ class OfferController extends Controller
      */
     public function index()
     {
-        //
+        $offers = Offer::all();
+        return view('welcome', compact('offers'));
     }
 
     /**
@@ -35,7 +36,7 @@ class OfferController extends Controller
     public function store(StoreOfferRequest $request)
     {
             Offer::create($request->all());
-            return redirect()->route('agent.offers.create')->with('success', 'offer created successfully.'); 
+            return redirect()->route('agent.offers.index')->with('success', 'offer created successfully.'); 
     }
 
     /**

@@ -30,20 +30,20 @@ class Offer extends Model
     ];
 
     public function agent(){
-        $this->belongsTo(User::class);
+       return $this->belongsTo(User::class);
     }
 
     public function domain(){
-        $this->belongsTo(Domain::class);
+        return $this->belongsTo(Domain::class);
     }
 
     public function city(){
-        $this->belongsTo(City::class);
+        return $this->belongsTo(City::class);
     }
 
     public function users()
     {
-        $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class);
     }
     
 

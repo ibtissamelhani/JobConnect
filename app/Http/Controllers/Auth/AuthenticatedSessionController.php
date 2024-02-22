@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
         if(Auth::user()->roles->contains('id', 1)){
             return redirect()->route('admin.index');
         }else{
-            return redirect('/');
+            return redirect()->route('agent.offers.index');
         }
         
     }

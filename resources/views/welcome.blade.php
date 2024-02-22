@@ -54,114 +54,34 @@
         </div>
 
         <div class=" col-span-2">
-          <div class="bg-white shadow rounded-lg p-4 mb-2">
+          @foreach ($offers as $offer)
+          <div class="bg-white shadow rounded-lg p-4 my-4">
                 <div class="flex items-center">
                   <img src="{{asset('images/pic.webp')}}" alt="Company logo" class="h-12 w-12 mr-4">
                   <div>
-                    <h2 class="text-xl font-medium text-gray-800">Agent Mailer</h2>
-                    <p class="text-gray-600">Detroit Connect - Tanger</p>
+                    <h2 class="text-xl font-bold text-gray-900">{{$offer->title}}</h2>
+                    <p class="text-gray-600">{{$offer->domain->name}} - {{$offer->city->name}}</p>
                   </div>
                 </div>
                 <div class="mt-4">
                   <p class="text-gray-600">
-                    Intégration des offres (préparation Subjects, Creatives);<br>
-                    Effectuer une série de tests pour assurer l'envoi des offres ;
+                    duration : {{$offer->duration}} - {{$offer->period}}
                   </p>
                   <ul class="list-disc list-inside text-gray-600 mt-2">
-                    <li>Temps plein, CDI</li>
-                    <li>Employeur actif il y a 10 jours</li>
+                    <li class="text-black font-semibold">Contract : {{$offer->contract}}</li>
+                    <li class="text-black font-semibold">Experience : {{$offer->experience}}</li>
                   </ul>
                 </div>
                 <div class="mt-4">
-                  <a href="#" class="text-blue-600 hover:underline">Voir toutes les offres de type &quot;Emplois Detroit Connect&quot;, &quot;Tanger&quot; ou &quot;Emplois Agent Mailer (H/F) - Tanger&quot;</a>
+                  <a href="#" class="text-blue-600 font-semibold text-lg hover:underline">Salary : {{$offer->min_salary}} $ - {{$offer->max_salary}} $ for months</a>
                 </div>
                 <div class="mt-4">
                   <p class="text-gray-600">
-                    • Rechercher les salaires : Agent mailer
+                    • {{$offer->description}}
                   </p>
                 </div>
-            </div>
-            <div class="bg-white shadow rounded-lg p-4 mb-2">
-              <div class="flex items-center">
-                <img src="{{asset('images/pic.webp')}}" alt="Company logo" class="h-12 w-12 mr-4">
-                <div>
-                  <h2 class="text-xl font-medium text-gray-800">Agent Mailer</h2>
-                  <p class="text-gray-600">Detroit Connect - Tanger</p>
-                </div>
-              </div>
-              <div class="mt-4">
-                <p class="text-gray-600">
-                  Intégration des offres (préparation Subjects, Creatives);<br>
-                  Effectuer une série de tests pour assurer l'envoi des offres ;
-                </p>
-                <ul class="list-disc list-inside text-gray-600 mt-2">
-                  <li>Temps plein, CDI</li>
-                  <li>Employeur actif il y a 10 jours</li>
-                </ul>
-              </div>
-              <div class="mt-4">
-                <a href="#" class="text-blue-600 hover:underline">Voir toutes les offres de type &quot;Emplois Detroit Connect&quot;, &quot;Tanger&quot; ou &quot;Emplois Agent Mailer (H/F) - Tanger&quot;</a>
-              </div>
-              <div class="mt-4">
-                <p class="text-gray-600">
-                  • Rechercher les salaires : Agent mailer
-                </p>
-              </div>
           </div>
-          <div class="bg-white shadow rounded-lg p-4 mb-2">
-            <div class="flex items-center">
-              <img src="{{asset('images/pic.webp')}}" alt="Company logo" class="h-12 w-12 mr-4">
-              <div>
-                <h2 class="text-xl font-medium text-gray-800">Agent Mailer</h2>
-                <p class="text-gray-600">Detroit Connect - Tanger</p>
-              </div>
-            </div>
-            <div class="mt-4">
-              <p class="text-gray-600">
-                Intégration des offres (préparation Subjects, Creatives);<br>
-                Effectuer une série de tests pour assurer l'envoi des offres ;
-              </p>
-              <ul class="list-disc list-inside text-gray-600 mt-2">
-                <li>Temps plein, CDI</li>
-                <li>Employeur actif il y a 10 jours</li>
-              </ul>
-            </div>
-            <div class="mt-4">
-              <a href="#" class="text-blue-600 hover:underline">Voir toutes les offres de type &quot;Emplois Detroit Connect&quot;, &quot;Tanger&quot; ou &quot;Emplois Agent Mailer (H/F) - Tanger&quot;</a>
-            </div>
-            <div class="mt-4">
-              <p class="text-gray-600">
-                • Rechercher les salaires : Agent mailer
-              </p>
-            </div>
-            </div>
-            <div class="bg-white shadow rounded-lg p-4">
-                <div class="flex items-center">
-                  <img src="{{asset('images/pic.webp')}}" alt="Company logo" class="h-12 w-12 mr-4">
-                  <div>
-                    <h2 class="text-xl font-medium text-gray-800">Agent Mailer</h2>
-                    <p class="text-gray-600">Detroit Connect - Tanger</p>
-                  </div>
-                </div>
-                <div class="mt-4">
-                  <p class="text-gray-600">
-                    Intégration des offres (préparation Subjects, Creatives);<br>
-                    Effectuer une série de tests pour assurer l'envoi des offres ;
-                  </p>
-                  <ul class="list-disc list-inside text-gray-600 mt-2">
-                    <li>Temps plein, CDI</li>
-                    <li>Employeur actif il y a 10 jours</li>
-                  </ul>
-                </div>
-                <div class="mt-4">
-                  <a href="#" class="text-blue-600 hover:underline">Voir toutes les offres de type &quot;Emplois Detroit Connect&quot;, &quot;Tanger&quot; ou &quot;Emplois Agent Mailer (H/F) - Tanger&quot;</a>
-                </div>
-                <div class="mt-4">
-                  <p class="text-gray-600">
-                    • Rechercher les salaires : Agent mailer
-                  </p>
-                </div>
-            </div>
+          @endforeach
         </div>
     </div>
 </x-nav>

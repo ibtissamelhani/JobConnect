@@ -21,6 +21,11 @@ return new class extends Migration
             $table->string('phone',15)->nullable();
             $table->string('address')->nullable();
             $table->text('description')->nullable();
+            $table->foreignId('company_id')
+                    ->nullable()
+                    ->constrained()
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
             $table->integer('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
