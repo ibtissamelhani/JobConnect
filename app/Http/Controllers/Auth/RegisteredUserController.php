@@ -44,15 +44,19 @@ class RegisteredUserController extends Controller
             
         ]);
         if ($request->role == 1) {
-           $user->roles()->attach(3); 
+
+            $user->roles()->attach(3);
+            event(new Registered($user));
+            Auth::login($user); 
+            return redirect()->route('agent.company.create'); 
+
         }else{
             $user->roles()->attach(2); 
+            event(new Registered($user));
+            Auth::login($user);
+            return redirect()->route('agent.offers.index'); 
         }
 
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
+        
     }
 }

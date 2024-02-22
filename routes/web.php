@@ -5,9 +5,10 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DomainController as AdminDomainController;
 use App\Http\Controllers\Admin\OfferController as AdminOfferController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Agent\CompanyController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Agent\OfferController;
+use App\Http\Controllers\Agent\OfferController ;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,7 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('agent')->name('agent.')->group(function () {
     Route::resource('offers', OfferController::class);
+    Route::resource('company', CompanyController::class);
 });
 
 
