@@ -26,6 +26,11 @@ class DomainController extends Controller
         return redirect()->route('admin.domains.index');
     }
 
+    public function update(DomainRequest $request,Domain $domain){
+        $domain->update($request->all());
+        return redirect()->route('admin.domains.index');
+    }
+
     public function destroy(Domain $domain){
         $domain->delete();
         return redirect()->route('admin.domains.index');

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- ALPINE JS -->
-    <script src="{{asset('js/alpine.js')}}" defer></script>
+    {{-- Flowbite CDN --}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"  rel="stylesheet" />
     {{-- TAILWIND CDN --}}
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title>@yield('title','Admin Dashboard')</title>
@@ -93,6 +93,10 @@
                     @yield('content')
 
                 </div>
+               <!-- ALPINE JS -->
+             <script src="{{asset('js/alpine.js')}}" defer></script>
+                <!-- Flowbite JS -->
+             <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
             </body>
         </html>
 

@@ -26,6 +26,13 @@ class CityController extends Controller
         return redirect()->route('admin.cities.index');
     }
 
+    public function update(CityRequest $request,City $city){
+        
+        $city->update($request->all());
+        return redirect()->route('admin.cities.index');
+
+    }
+
     public function destroy(City $city){
         $city->delete();
         return redirect()->route('admin.cities.index');
