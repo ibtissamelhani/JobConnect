@@ -4,15 +4,17 @@
         <div>
             <div class="sticky top-5  border-r-2 pr-4 z-10">
                 @auth
-                    <a href="{{ route('agent.offers.create') }}"
-                        class="inline-flex items-center justify-center mb-8 text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-                        <span class="w-full">create a new offres</span>
-                        <svg class="w-4 h-4 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M1 5h12m0 0L9 1m4 4L9 9" />
-                        </svg>
-                    </a>
+                    @can('create', App\Models\Offer::class)
+                        <a href="{{ route('agent.offers.create') }}"
+                            class="inline-flex items-center justify-center mb-8 text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                            <span class="w-full">create a new offres</span>
+                            <svg class="w-4 h-4 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M1 5h12m0 0L9 1m4 4L9 9" />
+                            </svg>
+                        </a>
+                    @endcan
                 @endauth
                 <form class="max-w-md mx-auto pb-4">
                     <label for="default-search"
@@ -34,8 +36,8 @@
                 </form>
                 <div class="flex flex-wrap py-10 border-y">
                     @foreach ($domains as $domain)
-                    <a href=""
-                    class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-gray-300 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">{{$domain->name}}</a>
+                        <a href=""
+                            class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-gray-300 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">{{ $domain->name }}</a>
                     @endforeach
                 </div>
                 <div class="flex flex-col  flex-wrap gap-6 py-10">
@@ -69,43 +71,45 @@
                         </div>
                         <div>
                             @auth
-                                <button id="dropdownMenuIconHorizontalButton-{{ $offer->id }}"
-                                data-dropdown-toggle="dropdownDotsHorizontal-{{ $offer->id }}"
-                                class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                                type="button">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor" viewBox="0 0 16 3">
-                                    <path
-                                        d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
-                                </svg>
-                            </button>
+                                @can(['update', 'delete'], $offer)
+                                    <button id="dropdownMenuIconHorizontalButton-{{ $offer->id }}"
+                                        data-dropdown-toggle="dropdownDotsHorizontal-{{ $offer->id }}"
+                                        class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                        type="button">
+                                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                            fill="currentColor" viewBox="0 0 16 3">
+                                            <path
+                                                d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                                        </svg>
+                                    </button>
 
-                            <!-- Dropdown menu -->
-                            <div id="dropdownDotsHorizontal-{{ $offer->id }}"
-                                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                    aria-labelledby="dropdownMenuIconHorizontalButton-{{ $offer->id }}">
-                                    <li>
-                                        <a href="{{ route('agent.offers.edit', $offer->id) }}"
-                                            class="block px-4 py-2 text-md font-semibold text-yellow-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit
-                                            offer</a>
-                                    </li>
+                                    <!-- Dropdown menu -->
+                                    <div id="dropdownDotsHorizontal-{{ $offer->id }}"
+                                        class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                                            aria-labelledby="dropdownMenuIconHorizontalButton-{{ $offer->id }}">
+                                            <li>
+                                                <a href="{{ route('agent.offers.edit', $offer->id) }}"
+                                                    class="block px-4 py-2 text-md font-semibold text-yellow-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit
+                                                    offer</a>
+                                            </li>
 
-                                </ul>
-                                <div class="py-2">
-                                    <form action="{{ route('agent.offers.destroy', $offer->id) }}" method="post"
-                                        class="hover:bg-gray-100">
-                                        @method('delete')
-                                        @csrf
-                                        <button
-                                            class="block px-4 py-2 text-md font-semibold text-red-700  dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                                            Delete offer
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
+                                        </ul>
+                                        <div class="py-2">
+                                            <form action="{{ route('agent.offers.destroy', $offer->id) }}" method="post"
+                                                class="hover:bg-gray-100">
+                                                @method('delete')
+                                                @csrf
+                                                <button
+                                                    class="block px-4 py-2 text-md font-semibold text-red-700  dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                                    Delete offer
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                @endcan
                             @endauth
-                            
+
                         </div>
                     </div>
 

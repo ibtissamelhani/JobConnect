@@ -27,6 +27,7 @@ class OfferController extends Controller
      */
     public function create()
     {
+        $this->authorize('create');
         $cities = City::all();
         $domains = Domain::all();
         return view('Agent.offer.create',compact('cities','domains'));
@@ -55,6 +56,7 @@ class OfferController extends Controller
     public function edit(Offer $offer)
     {
         // $STATUS_RADIO = Offer::STATUS;
+        $this->authorize('update',$offer);
         $cities = City::all();
         $domains = Domain::all();
         return view('Agent.offer.edit', compact('offer','cities','domains'));
@@ -74,6 +76,7 @@ class OfferController extends Controller
      */
     public function destroy(Offer $offer)
     {
+        $this->authorize('delete',$offer);
         $offer->delete();
         return redirect()->route('agent.offers.index');
     }
