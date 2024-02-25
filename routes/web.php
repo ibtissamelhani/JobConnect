@@ -9,6 +9,7 @@ use App\Http\Controllers\Agent\CompanyController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Agent\OfferController ;
+use App\Http\Controllers\Agent\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +22,7 @@ use App\Http\Controllers\Agent\OfferController ;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [OfferController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -39,6 +38,7 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('agent')->name('agent.')->group(function () {
     Route::resource('offers', OfferController::class);
+    Route::get('/agentOffers/{id}', [UserController::class, 'getAgentOffers'])->name('agentOffers');
     Route::resource('company', CompanyController::class);
 });
 

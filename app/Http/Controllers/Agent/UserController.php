@@ -64,4 +64,17 @@ class UserController extends Controller
     {
         //
     }
+
+    /**
+     * get user's offers.
+     */
+    public function getAgentOffers($id){
+        $user = User::find($id);
+        if (!$user) {
+            abort(404);
+        }
+    
+        $userOffers = $user->offers()->get();
+        return view('Agent.offer.agentOffers', compact('userOffers'));
+    }
 }

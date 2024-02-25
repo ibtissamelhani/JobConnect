@@ -33,45 +33,23 @@
                     </div>
                 </form>
                 <div class="flex flex-wrap py-10 border-y">
+                    @foreach ($domains as $domain)
                     <a href=""
-                        class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-gray-300 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Alternative</a>
-                    <a href=""
-                        class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-gray-300 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-gray-300 dark:hover:bg-gray-700">Alternative</a>
-                    <a href=""
-                        class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-gray-300 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-gray-300 dark:hover:bg-gray-700">Alternative</a>
-                    <a href=""
-                        class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-gray-300 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-gray-300 dark:hover:bg-gray-700">Alternative</a>
-                    <a href=""
-                        class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-gray-300 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Alternative</a>
+                    class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-gray-300 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">{{$domain->name}}</a>
+                    @endforeach
                 </div>
-                <div class="flex flex-col justify-center items-center flex-wrap gap-6 py-10">
-                    <a href="#"
-                        class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                        <svg class="w-4 h-4 ms-2 rtl:rotate-180 mr-4" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M1 5h12m0 0L9 1m4 4L9 9" />
-                        </svg>
-                        casablanca
-                    </a>
-                    <a href="#"
-                        class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                        <svg class="w-4 h-4 ms-2 rtl:rotate-180 mr-4" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M1 5h12m0 0L9 1m4 4L9 9" />
-                        </svg>
-                        casablanca
-                    </a>
-                    <a href="#"
-                        class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                        <svg class="w-4 h-4 ms-2 rtl:rotate-180 mr-4" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M1 5h12m0 0L9 1m4 4L9 9" />
-                        </svg>
-                        casablanca
-                    </a>
+                <div class="flex flex-col  flex-wrap gap-6 py-10">
+                    @foreach ($cities as $city)
+                        <a href="#"
+                            class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline hover:text-red-500">
+                            <svg class="w-4 h-4 ms-2 rtl:rotate-180 mr-4" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                            </svg>
+                            {{ $city->name }}
+                        </a>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -90,7 +68,9 @@
                             </div>
                         </div>
                         <div>
-                            <button id="dropdownMenuIconHorizontalButton-{{$offer->id}}" data-dropdown-toggle="dropdownDotsHorizontal-{{$offer->id}}"
+                            @auth
+                                <button id="dropdownMenuIconHorizontalButton-{{ $offer->id }}"
+                                data-dropdown-toggle="dropdownDotsHorizontal-{{ $offer->id }}"
                                 class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                                 type="button">
                                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -101,26 +81,31 @@
                             </button>
 
                             <!-- Dropdown menu -->
-                            <div id="dropdownDotsHorizontal-{{$offer->id}}"
+                            <div id="dropdownDotsHorizontal-{{ $offer->id }}"
                                 class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                    aria-labelledby="dropdownMenuIconHorizontalButton-{{$offer->id}}">
+                                    aria-labelledby="dropdownMenuIconHorizontalButton-{{ $offer->id }}">
                                     <li>
-                                        <a href="{{route('agent.offers.edit',$offer->id)}}"
-                                            class="block px-4 py-2 text-md font-semibold text-yellow-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit offer</a>
+                                        <a href="{{ route('agent.offers.edit', $offer->id) }}"
+                                            class="block px-4 py-2 text-md font-semibold text-yellow-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit
+                                            offer</a>
                                     </li>
-                                   
+
                                 </ul>
                                 <div class="py-2">
-                                    <form action="{{ route('agent.offers.destroy', $offer->id) }}" method="post" class="hover:bg-gray-100">
+                                    <form action="{{ route('agent.offers.destroy', $offer->id) }}" method="post"
+                                        class="hover:bg-gray-100">
                                         @method('delete')
                                         @csrf
-                                        <button class="block px-4 py-2 text-md font-semibold text-red-700  dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                        <button
+                                            class="block px-4 py-2 text-md font-semibold text-red-700  dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                                             Delete offer
                                         </button>
                                     </form>
                                 </div>
                             </div>
+                            @endauth
+                            
                         </div>
                     </div>
 

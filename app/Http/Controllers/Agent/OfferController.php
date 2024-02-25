@@ -16,8 +16,10 @@ class OfferController extends Controller
      */
     public function index()
     {
+        $cities = City::all();
+        $domains = Domain::all();
         $offers = Offer::latest()->get();
-        return view('welcome', compact('offers'));
+        return view('welcome', compact('offers','cities','domains'));
     }
 
     /**
@@ -75,4 +77,5 @@ class OfferController extends Controller
         $offer->delete();
         return redirect()->route('agent.offers.index');
     }
+
 }
