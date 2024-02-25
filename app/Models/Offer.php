@@ -29,7 +29,7 @@ class Offer extends Model
         2 => 'sent',
     ];
 
-    public function agent(){
+    public function user(){
        return $this->belongsTo(User::class);
     }
 
@@ -45,7 +45,7 @@ class Offer extends Model
     {
         return $this->belongsToMany(User::class);
     }
-    
+
 
 
 }

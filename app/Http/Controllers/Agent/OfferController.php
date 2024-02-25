@@ -16,8 +16,10 @@ class OfferController extends Controller
      */
     public function index()
     {
-        $offers = Offer::all();
-        return view('welcome', compact('offers'));
+        $cities = City::all();
+        $domains = Domain::all();
+        $offers = Offer::latest()->get();
+        return view('welcome', compact('offers','cities','domains'));
     }
 
     /**
@@ -25,6 +27,7 @@ class OfferController extends Controller
      */
     public function create()
     {
+        $this->authorize('create');
         $cities = City::all();
         $domains = Domain::all();
         return view('Agent.offer.create',compact('cities','domains'));
@@ -50,24 +53,32 @@ class OfferController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Offer $offer)
     {
-        //
+        // $STATUS_RADIO = Offer::STATUS;
+        $this->authorize('update',$offer);
+        $cities = City::all();
+        $domains = Domain::all();
+        return view('Agent.offer.edit', compact('offer','cities','domains'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Offer $offer)
     {
-        //
+        $offer->update($request->all());
+        return redirect()->route('agent.offers.index')->with('success', 'project updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Offer $offer)
     {
-        //
+        $this->authorize('delete',$offer);
+        $offer->delete();
+        return redirect()->route('agent.offers.index');
     }
+
 }
