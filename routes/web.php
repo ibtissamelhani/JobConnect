@@ -67,11 +67,22 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::post('/domains/store',[AdminDomainController::class,'store']) ->name('domains.store');
 
     // delete city
-    Route::delete('cities/delete/{city}',[AdminCityController::class,'destroy'])->name('cities.destroy');
+    Route::delete('/cities/delete/{city}',[AdminCityController::class,'destroy'])->name('cities.destroy');
 
     // delete domain
-    Route::delete('domains/delete/{domain}',[AdminDomainController::class,'destroy'])->name('domains.destroy');
+    Route::delete('/domains/delete/{domain}',[AdminDomainController::class,'destroy'])->name('domains.destroy');
 
+    // update city
+    Route::patch('/cities/update/{city}',[AdminCityController::class,'update'])->name('cities.update');
+
+    //update domain
+    Route::patch('/domains/update/{domain}',[AdminDomainController::class,'update'])->name('domains.update');
+
+    // ban user
+    Route::post('/users/ban/{user}',[AdminUserController::class,'ban'])->name('users.ban');
+
+    // unban user
+    Route::post('/users/unban/{user}',[AdminUserController::class,'unban'])->name('users.unban');
 
 });
 

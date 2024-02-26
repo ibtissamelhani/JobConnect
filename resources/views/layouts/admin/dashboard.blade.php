@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- ALPINE JS -->
-    <script src="{{asset('js/alpine.js')}}" defer></script>
+    {{-- Flowbite CDN --}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"  rel="stylesheet" />
     {{-- TAILWIND CDN --}}
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title>@yield('title','Admin Dashboard')</title>
@@ -42,7 +42,7 @@
                                     <!-- BASIC LINK -->
                                     <a href="#" class="block py-2.5 px-4 flex items-center space-x-2 bg-gray-800 text-white hover:bg-gray-800 hover:text-white rounded">
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                        <span>Dashboard</span>
+                                        <span>@yield('table_title','Dashboard')</span>
                                     </a>
                                     <!-- DROPDOWN LINK -->
                                     <div class="block" x-data="{open: false}">
@@ -93,6 +93,10 @@
                     @yield('content')
 
                 </div>
+               <!-- ALPINE JS -->
+             <script src="{{asset('js/alpine.js')}}" defer></script>
+                <!-- Flowbite JS -->
+             <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
             </body>
         </html>
 

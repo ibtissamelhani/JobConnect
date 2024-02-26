@@ -1,5 +1,6 @@
 @extends('layouts.admin.dashboard')
 @section('title','Job offers table')
+@section('table_title','Offers')
 @section('content')
  <!-- PAGE CONTENT -->
  <main class="flex-1 h-screen overflow-y-scroll overflow-x-hidden">
@@ -63,30 +64,54 @@
         <!-- END OF STATISTICS -->
 
         {{-- table component --}}
-        <x-admin.table :headers="['Title'=>'text-left','Contract'=>'text-left','Description'=>'text-center','Salary'=>'text-center','Experience'=>'text-center','Status'=>'text-center','action'=>'text-center']" >
+        <x-admin.table :headers="['Title'=>'text-left','Contract'=>'text-left','Min_salary' =>'text-center','Max_salary' =>'text-center', 'Duration' => 'text-center','Period'=>'text-center','Experience'=>'text-center','Description'=>'text-center','Status'=>'text-center','Action'=>'text-center']" >
 
+        @foreach($offers as $offer) 
 
-                    <tr class="border-b border-gray-200 hover:bg-gray-100">
+        <tr class="border-b border-gray-200 hover:bg-gray-100">
                         
         <td class="py-3 px-6 text-left whitespace-nowrap">
-                Reactjs
-            </div>
+                {{$offer->title}}
+            
         </td>
+
+        <td class="py-3 px-6 text-left whitespace-nowrap">
+            {{$offer->contract}}
         
-        <td class="py-3 px-6 text-left">
-            <div class="flex items-center">
-                <div class="mr-2">
-                    <img class="w-6 h-6 rounded-full" src="https://randomuser.me/api/portraits/men/1.jpg"/>
-                </div>
-                <span>Eshal Rosas</span>
-            </div>
         </td>
+
+        <td class="py-3 px-6 text-left whitespace-nowrap">
+            {{$offer->min_salary}}
+      
+        </td>
+
+        <td class="py-3 px-6 text-left whitespace-nowrap">
+            {{$offer->max_salary}}
+       
+        </td>
+
+        <td class="py-3 px-6 text-left whitespace-nowrap">
+            {{$offer->duration}}
+       
+        </td>
+
+        <td class="py-3 px-6 text-left whitespace-nowrap">
+            {{$offer->period}}
+        
+        </td>
+
+        <td class="py-3 px-6 text-left whitespace-nowrap">
+            {{$offer->experience}}
+        </td>
+
+        <td class="py-3 px-6 text-left whitespace-nowrap">
+            {{$offer->description}}
+        </td>
+
         <td class="py-3 px-6 text-center">
-            22
+            <span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs"> {{$offer->status}}</span>
         </td>
-        <td class="py-3 px-6 text-center">
-            <span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">Active</span>
-        </td>
+
         <td class="py-3 px-6 text-center">
             <div class="flex item-center justify-center">
                 <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer cursor-pointer">
@@ -108,7 +133,7 @@
             </div>
         </td>
     </tr>
-
+    @endforeach
 
    
     </x-admin.table>   

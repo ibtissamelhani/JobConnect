@@ -1,5 +1,6 @@
 @extends('layouts.admin.dashboard')
 @section('title','Cities table')
+@section('table_title','Cities')
 @section('content')
  <!-- PAGE CONTENT -->
  <main class="flex-1 h-screen overflow-y-scroll overflow-x-hidden">
@@ -64,15 +65,16 @@
 
           {{-- Add button --}}
         <div class="flex justify-end">
-            <a href="{{route('admin.cities.create')}}">
-            <button type="button" class="flex items-center justify-center text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"> 
+            <button type="button" class="flex items-center justify-center text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-6 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 " data-modal-target="create-modal" data-modal-toggle="create-modal"  > 
                 <span>Add</span>
                 <svg class="w-5 h-5 ml-2 align-baseline" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 5v14M5 12h14"/>
                 </svg>
             </button>
-        </a>
         </div>
+
+        <x-admin.create-modal :title="'Add city'" :route="route('admin.cities.store')"/>
+        
         
         {{-- table component --}}
         <x-admin.table :headers="['Id'=>'text-left','Name'=>'text-center','Action'=>'text-center']" >
@@ -98,12 +100,21 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                     </svg>
                 </div>
+                
+                {{-- update button --}}
+
+                <a  type="button" data-modal-target="update-modal-{{$city->id}}" data-modal-toggle="update-modal-{{$city->id}}"  >
                 <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                     </svg>
                 </div>
+                </a>
+
+                {{-- update modal --}}
+                <x-admin.update-modal :title="'Update city name'" :entity="$city" :route="route('admin.cities.update',['city'=>$city->id])"/>
                 
+                {{-- delete button --}}
                 <form action="{{ route('admin.cities.destroy', ['city' => $city->id]) }}" method="POST">
                     @method('DELETE')
                     @csrf
