@@ -74,7 +74,7 @@ class UserController extends Controller
             abort(404);
         }
     
-        $userOffers = $user->offers()->get();
+        $userOffers = $user->agentOffers()->get();
         return view('Agent.offer.agentOffers', compact('userOffers'));
     }
 }
