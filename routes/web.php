@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Agent\OfferController ;
 use App\Http\Controllers\Agent\UserController;
+use App\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +84,12 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
     // unban user
     Route::post('/users/unban/{user}',[AdminUserController::class,'unban'])->name('users.unban');
+
+    // offer status update
+    Route::post('/offers/updateStatus/{offer}',[AdminOfferController::class,'updateStatus'])->name('offers.updateStatus');
+
+    // delete offer
+    Route::delete('/offers/delete/{offer}',[AdminOfferController::class,'delete'])->name('offers.delete');
 
 });
 

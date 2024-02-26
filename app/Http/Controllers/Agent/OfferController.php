@@ -27,7 +27,7 @@ class OfferController extends Controller
      */
     public function create()
     {
-        $this->authorize('create');
+        $this->authorize('create',Offer::class);
         $cities = City::all();
         $domains = Domain::all();
         return view('Agent.offer.create',compact('cities','domains'));
