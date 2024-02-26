@@ -53,8 +53,10 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
+        $company->loadMedia('photos');
+        $photos = $company->getMedia('photos');
         $numberOfUsers = $company->users()->count();
-        return view('Agent.company.show', compact('company','numberOfUsers'));
+        return view('Agent.company.show', compact('company','numberOfUsers','photos'));
     }
 
     /**
@@ -84,5 +86,15 @@ class CompanyController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    // add content to company profile
+
+    public function addContent(Request $request,Company $company){
+        if ($request->hasFile('photo')) {
+            $company->addMediaFromRequest('photo')->toMediaCollection('photos');
+        }
+        return redirect()->route('agent.company.show',compact('company'));
+    
     }
 }

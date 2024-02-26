@@ -43,6 +43,7 @@ Route::prefix('agent')->name('agent.')->group(function () {
     Route::resource('offers', OfferController::class);
     Route::get('/agentOffers/{id}', [UserController::class, 'getAgentOffers'])->name('agentOffers');
     Route::resource('company', CompanyController::class);
+    Route::post('/companies/{company}/add-content', [CompanyController::class, 'addContent'])->name('addContent');
 });
 
 

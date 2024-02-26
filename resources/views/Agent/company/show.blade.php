@@ -19,34 +19,74 @@
                     class="text-gray-800">{{ $numberOfUsers }}</span></h4>
         </div>
         <section class="text-gray-600 body-font">
+
+
+            <!-- Modal toggle -->
+            <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
+            class="py-2.5 px-5 m-2 mt-20 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                type="button">
+                Add content
+            </button>
+
+            <!-- Main modal -->
+            <div id="crud-modal" tabindex="-1" aria-hidden="true"
+                class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div class="relative p-4 w-full max-w-md max-h-full">
+                    <!-- Modal content -->
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <!-- Modal header -->
+                        <div
+                            class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                            <button type="button"
+                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                data-modal-toggle="crud-modal">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                        </div>
+                        <!-- Modal body -->
+                        <form class="p-4 md:p-5" method="POST" action="{{route('agent.addContent', $company->id)}}" enctype="multipart/form-data" >
+                            @csrf
+                            <div class="mb-4 grid-cols-2">
+                                <input name="photo" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+                            </div>
+                            <button type="submit"
+                                class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                Add new content
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <div class="container px-5 py-24 mx-auto flex flex-wrap">
                 <div class="lg:w-2/3 mx-auto">
-                    <div class="flex flex-wrap w-full bg-gray-100 py-32 px-10 relative mb-4">
-                        <img alt="gallery"
-                            class="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
-                            src="https://dummyimage.com/820x340">
-                    </div>
                     <div class="flex flex-wrap -mx-2">
-                        <div class="px-2 w-1/2">
+                        @foreach($photos as $photo)
+                        <div class="px-2 w-1/2 mb-4">
                             <div class="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
                                 <img alt="gallery"
-                                    class="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
-                                    src="https://dummyimage.com/542x460">
+                                    class="w-full object-cover h-full object-center block  absolute inset-0"
+                                    src="{{ $photo->getUrl() }}">
                             </div>
                         </div>
-                        <div class="px-2 w-1/2">
-                            <div class="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
-                                <img alt="gallery"
-                                    class="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
-                                    src="https://dummyimage.com/542x420">
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </section>
         <div class="flex justify-end">
-            <a href="{{route('agent.company.edit', $company->id)}}"
+            <a href="{{ route('agent.company.edit', $company->id) }}"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Edit</a>
         </div>
         <div class="flex justify-center pt-4 space-x-4 align-center">
