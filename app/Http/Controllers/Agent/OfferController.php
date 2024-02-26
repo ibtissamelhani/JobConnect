@@ -8,6 +8,7 @@ use App\Models\City;
 use App\Models\Domain;
 use App\Models\Offer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class OfferController extends Controller
 {
@@ -27,7 +28,7 @@ class OfferController extends Controller
      */
     public function create()
     {
-        $this->authorize('create');
+        $this->authorize('create',Offer::class);
         $cities = City::all();
         $domains = Domain::all();
         return view('Agent.offer.create',compact('cities','domains'));

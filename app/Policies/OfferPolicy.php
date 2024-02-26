@@ -29,7 +29,8 @@ class OfferPolicy
      */
     public function create(User $user)
     {
-        return $user->roles->whereIn('name', ['Agent', 'Recruiter'])->isNotEmpty();
+        // return $user->roles->whereIn('name', ['Agent', 'Recruiter'])->isNotEmpty();
+        return true;
     }
 
     /**

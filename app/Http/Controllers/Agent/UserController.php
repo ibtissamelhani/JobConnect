@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Agent;
 
 use App\Http\Controllers\Controller;
+use App\Models\Offer;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -69,12 +70,14 @@ class UserController extends Controller
      * get user's offers.
      */
     public function getAgentOffers($id){
+
+        $STATUS = Offer::STATUS;
         $user = User::find($id);
         if (!$user) {
             abort(404);
         }
     
         $userOffers = $user->agentOffers()->get();
-        return view('Agent.offer.agentOffers', compact('userOffers'));
+        return view('Agent.offer.agentOffers', compact('userOffers','STATUS'));
     }
 }
