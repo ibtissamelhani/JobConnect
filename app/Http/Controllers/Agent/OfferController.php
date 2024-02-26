@@ -18,7 +18,7 @@ class OfferController extends Controller
     {
         $cities = City::all();
         $domains = Domain::all();
-        $offers = Offer::latest()->get();
+        $offers = Offer::where('status', 1)->latest()->get();
         return view('welcome', compact('offers','cities','domains'));
     }
 
