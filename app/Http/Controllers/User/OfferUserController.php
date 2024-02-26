@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Agent;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Offer;
-use App\Models\User;
+use App\Models\OfferUser;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class OfferUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,9 +20,10 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($offerId)
     {
-        //
+        $offer = Offer::findOrFail($offerId);
+        return view('User.applyOffre',compact('offer'));
     }
 
     /**
@@ -30,7 +31,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $offerUser = OfferUser::create($request->all());
+        $offerUser->addMediaFromRequest('cv')->toMediaCollection('CVs');
+        return redirect()->route('agent.offers.index');
     }
 
     /**
@@ -57,27 +60,11 @@ class UserController extends Controller
         //
     }
 
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
         //
-    }
-
-    /**
-     * get user's offers.
-     */
-    public function getAgentOffers($id){
-
-        $STATUS = Offer::STATUS;
-        $user = User::find($id);
-        if (!$user) {
-            abort(404);
-        }
-    
-        $userOffers = $user->agentOffers()->get();
-        return view('Agent.offer.agentOffers', compact('userOffers','STATUS'));
     }
 }
