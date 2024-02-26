@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Agent\OfferController ;
 use App\Http\Controllers\Agent\UserController;
+use App\Http\Controllers\User\OfferUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,14 @@ Route::prefix('agent')->name('agent.')->group(function () {
     Route::resource('offers', OfferController::class);
     Route::get('/agentOffers/{id}', [UserController::class, 'getAgentOffers'])->name('agentOffers');
     Route::resource('company', CompanyController::class);
+});
+
+
+// user route 
+
+Route::prefix('user')->name('user.')->group(function () {
+    Route::get('offerUser/create/{offer}', [OfferUserController::class, 'create'])->name('offerUser.create');
+    Route::post('offerUser/store', [OfferUserController::class, 'store'])->name('offerUser.store');
 });
 
 
