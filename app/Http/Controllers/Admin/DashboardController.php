@@ -11,6 +11,9 @@ class DashboardController extends Controller
     // View the admin dashboard
 
     public function index(){
+
+        
+
         return view('admin.index');
     }
 

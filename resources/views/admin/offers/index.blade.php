@@ -1,6 +1,5 @@
 @extends('layouts.admin.dashboard')
 @section('title','Job offers table')
-@section('table_title','Offers')
 @section('content')
  <!-- PAGE CONTENT -->
  <main class="flex-1 h-screen overflow-y-scroll overflow-x-hidden">
@@ -12,7 +11,7 @@
     </div>
     <section class="max-w-7xl mx-auto py-4 px-5">
         <div class="flex justify-between items-center border-b border-gray-300">
-            <h1 class="text-2xl font-semibold pt-2 pb-6">Dashboard</h1>
+            <h1 class="text-2xl font-semibold pt-2 pb-6">Job Offers</h1>
         </div>
 
         <!-- STATISTICS -->
@@ -64,7 +63,7 @@
         <!-- END OF STATISTICS -->
 
         {{-- table component --}}
-        <x-admin.table :headers="['Title'=>'text-left','Contract'=>'text-left','Min_salary' =>'text-center','Max_salary' =>'text-center', 'Duration' => 'text-center','Period'=>'text-center','Experience'=>'text-center','Description'=>'text-center','Status'=>'text-center','Action'=>'text-center']" >
+        <x-admin.table :headers="['Title'=>'text-left','Contract'=>'text-left','Min_salary' =>'text-center','Max_salary' =>'text-center', 'Duration' => 'text-center','Period'=>'text-left','Experience'=>'text-center','Description'=>'text-center','Status'=>'text-center','Action'=>'text-center']" >
 
         @foreach($offers as $offer) 
 
@@ -109,9 +108,16 @@
         </td>
 
         <td class="py-3 px-6 text-center">
-            <span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs"> {{$offer->status}}</span>
-        </td>
+            @if($offer->status == 1)
+                <span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs"> {{$offer->getstatus()}}</span>
+            @endif
 
+            @if($offer->status == 2)
+                <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs"> {{$offer->getstatus()}}</span>
+            
+            @endif
+            
+        </td>
         <td class="py-3 px-6 text-center">
             <div class="flex item-center justify-center">
                 <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer cursor-pointer">
@@ -120,16 +126,27 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                     </svg>
                 </div>
-                <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer cursor-pointer">
+                {{-- offer status update --}}
+
+                <form action="{{route('admin.offers.updateStatus',['offer' => $offer->id ])}}" method="POST">
+                    @csrf
+                <button type="submit" class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" />
                     </svg>
-                </div>
-                <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer cursor-pointer">
+                </button>
+                </form>
+
+               {{-- delete offer --}}
+               <form action="{{route('admin.offers.delete',['offer'=>$offer->id])}}" method="POST">
+                @method('delete')
+                @csrf
+                <button type="submit" class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                     </svg>
-                </div>
+                </button>
+                </form>
             </div>
         </td>
     </tr>
