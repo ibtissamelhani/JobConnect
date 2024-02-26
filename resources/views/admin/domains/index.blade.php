@@ -1,5 +1,6 @@
 @extends('layouts.admin.dashboard')
 @section('title','Domains table')
+@section('table_title','Domains')
 @section('content')
  <!-- PAGE CONTENT -->
  <main class="flex-1 h-screen overflow-y-scroll overflow-x-hidden">
