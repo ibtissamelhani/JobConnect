@@ -51,17 +51,18 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Company $company)
     {
-        //
+        $numberOfUsers = $company->users()->count();
+        return view('Agent.company.show', compact('company','numberOfUsers'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Company $company)
     {
-        //
+        return view('Agent.company.edit');
     }
 
     /**
