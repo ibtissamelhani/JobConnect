@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Agent\OfferController ;
 use App\Http\Controllers\Agent\UserController;
 use App\Http\Controllers\User\OfferUserController;
+use App\Http\Controllers\User\UserController as UserUserController;
 use App\Models\Role;
 
 
@@ -30,7 +31,7 @@ use App\Models\Role;
 Route::get('/', [OfferController::class, 'index']);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -43,15 +44,18 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('agent')->name('agent.')->group(function () {
     Route::resource('offers', OfferController::class);
-    Route::get('/agentOffers/{id}', [UserController::class, 'getAgentOffers'])->name('agentOffers');
+    Route::get('/agentOffers/{id}', [UserController::class, 'getAgentOffers'])->name('agentOffers')->middleware('auth');
+    Route::get('/requests/{offer}', [OfferController::class, 'getRequests'])->name('requests')->middleware('auth');
     Route::resource('company', CompanyController::class);
+    Route::post('/companies/{company}/add-content', [CompanyController::class, 'addContent'])->name('addContent')->middleware('auth');
 });
 
 
 // user route 
 
-Route::prefix('user')->name('user.')->group(function () {
+Route::prefix('user')->name('user.')->middleware('auth')->group(function () {
     Route::get('offerUser/create/{offer}', [OfferUserController::class, 'create'])->name('offerUser.create');
+    Route::get('offerUser/getAppliedOffers/{user}', [UserUserController::class, 'getAppliedOffers'])->name('getAppliedOffers');
     Route::post('offerUser/store', [OfferUserController::class, 'store'])->name('offerUser.store');
 });
 

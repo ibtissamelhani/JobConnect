@@ -23,8 +23,4 @@ class Company extends Model implements HasMedia
     {
         return $this->hasMany(User::class);
     }
-    // public function offers()
-    // {
-    //     return $this->hasOneThrough(Offer::class, User::class);
-    // }
 }
