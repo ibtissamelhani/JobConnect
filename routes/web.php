@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
 Route::prefix('agent')->name('agent.')->group(function () {
     Route::resource('offers', OfferController::class);
     Route::get('/agentOffers/{id}', [UserController::class, 'getAgentOffers'])->name('agentOffers');
+    Route::get('/requests/{offer}', [OfferController::class, 'getRequests'])->name('requests');
     Route::resource('company', CompanyController::class);
     Route::post('/companies/{company}/add-content', [CompanyController::class, 'addContent'])->name('addContent');
 });

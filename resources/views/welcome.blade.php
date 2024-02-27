@@ -40,7 +40,8 @@
                             class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-gray-300 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">{{ $domain->name }}</a>
                     @endforeach
                 </div>
-                <div class="flex flex-col  flex-wrap gap-6 py-10">
+                <h3>Cities</h3>
+                <div class="flex flex-col  gap-6 py-10 max-h-48 overflow-auto">
                     @foreach ($cities as $city)
                         <a href="#"
                             class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline hover:text-red-500">
@@ -104,6 +105,10 @@
                                                 <a href="{{ route('agent.offers.edit', $offer->id) }}"
                                                     class="block px-4 py-2 text-md font-semibold text-yellow-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit
                                                     offer</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('agent.requests',$offer->id) }}"
+                                                    class="block px-4 py-2 text-md font-semibold text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Requests</a>
                                             </li>
 
                                         </ul>

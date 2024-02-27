@@ -82,4 +82,12 @@ class OfferController extends Controller
         return redirect()->route('agent.offers.index');
     }
 
+    /**
+     * get request of an offer.
+     */
+    public function getRequests(Offer $offer){
+        $requests = $offer->users()->withPivot('description','created_at','id')->get();
+        return view('Agent.offer.requests', compact('requests'));
+    }
+
 }
