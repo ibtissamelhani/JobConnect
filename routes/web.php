@@ -44,16 +44,16 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('agent')->name('agent.')->group(function () {
     Route::resource('offers', OfferController::class);
-    Route::get('/agentOffers/{id}', [UserController::class, 'getAgentOffers'])->name('agentOffers');
-    Route::get('/requests/{offer}', [OfferController::class, 'getRequests'])->name('requests');
+    Route::get('/agentOffers/{id}', [UserController::class, 'getAgentOffers'])->name('agentOffers')->middleware('auth');
+    Route::get('/requests/{offer}', [OfferController::class, 'getRequests'])->name('requests')->middleware('auth');
     Route::resource('company', CompanyController::class);
-    Route::post('/companies/{company}/add-content', [CompanyController::class, 'addContent'])->name('addContent');
+    Route::post('/companies/{company}/add-content', [CompanyController::class, 'addContent'])->name('addContent')->middleware('auth');
 });
 
 
 // user route 
 
-Route::prefix('user')->name('user.')->group(function () {
+Route::prefix('user')->name('user.')->middleware('auth')->group(function () {
     Route::get('offerUser/create/{offer}', [OfferUserController::class, 'create'])->name('offerUser.create');
     Route::get('offerUser/getAppliedOffers/{user}', [UserUserController::class, 'getAppliedOffers'])->name('getAppliedOffers');
     Route::post('offerUser/store', [OfferUserController::class, 'store'])->name('offerUser.store');
