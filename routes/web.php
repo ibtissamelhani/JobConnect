@@ -10,7 +10,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Agent\OfferController ;
 use App\Http\Controllers\Agent\UserController;
+use App\Http\Controllers\User\OfferUserController;
 use App\Models\Role;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +24,9 @@ use App\Models\Role;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+    
 
+    
 Route::get('/', [OfferController::class, 'index']);
 
 Route::get('/dashboard', function () {
@@ -44,10 +48,18 @@ Route::prefix('agent')->name('agent.')->group(function () {
 });
 
 
+// user route 
+
+Route::prefix('user')->name('user.')->group(function () {
+    Route::get('offerUser/create/{offer}', [OfferUserController::class, 'create'])->name('offerUser.create');
+    Route::post('offerUser/store', [OfferUserController::class, 'store'])->name('offerUser.store');
+});
+
+Route::get('/offers/search',[OfferController::class,'search'])->name('offers.search');
 
 ////////// Admine routes /////////////////////////////////////////////////////////////////
 
-Route::prefix('admin')->name('admin.')->group(function(){
+Route::middleware('admin')->prefix('admin')->name('admin.')->group(function(){
 
     // display index pages
 
@@ -90,6 +102,11 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
     // delete offer
     Route::delete('/offers/delete/{offer}',[AdminOfferController::class,'delete'])->name('offers.delete');
+
+   
+
+    
+
 
 });
 
