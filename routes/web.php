@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Agent\OfferController ;
 use App\Http\Controllers\Agent\UserController;
 use App\Http\Controllers\User\OfferUserController;
+use App\Http\Controllers\User\UserController as UserUserController;
 use App\Models\Role;
 
 
@@ -51,6 +52,7 @@ Route::prefix('agent')->name('agent.')->group(function () {
 
 Route::prefix('user')->name('user.')->group(function () {
     Route::get('offerUser/create/{offer}', [OfferUserController::class, 'create'])->name('offerUser.create');
+    Route::get('offerUser/getAppliedOffers/{user}', [UserUserController::class, 'getAppliedOffers'])->name('getAppliedOffers');
     Route::post('offerUser/store', [OfferUserController::class, 'store'])->name('offerUser.store');
 });
 
