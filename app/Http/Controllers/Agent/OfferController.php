@@ -7,6 +7,7 @@ use App\Http\Requests\StoreOfferRequest;
 use App\Models\City;
 use App\Models\Domain;
 use App\Models\Offer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -81,6 +82,28 @@ class OfferController extends Controller
         $offer->delete();
         return redirect()->route('agent.offers.index');
     }
+
+
+    
+    // searching offers
+
+    public function search(Request $request){
+
+        $cities = City::all();
+        $domains = Domain::all();
+
+        $keyword = $request->keyword;
+        $offers = Offer::with('user.company', 'city','domain')->where('title', 'like', '%' . $keyword . '%')->orWhereHas('city', function ($query) use ($keyword) {
+            $query->where('name', 'like', '%' . $keyword . '%');
+        })
+        ->orWhereHas('domain', function ($query) use ($keyword) {
+            $query->where('name', 'like', '%' . $keyword . '%');
+        })->get();
+
+       
+        return view('welcome', compact('offers','cities','domains'));
+    }
+
 
     /**
      * get request of an offer.

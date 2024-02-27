@@ -34,9 +34,8 @@ class User extends Authenticatable implements HasMedia
     ];
 
     public const STATUS_RADIO = [
-        '1'=> 'Pending',
-        '2'=> 'Accepted',
-        '3'=> 'Banned',
+        '1'=> 'Accepted',
+        '2'=> 'Banned',
     ];
 
     /**

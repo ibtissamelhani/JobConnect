@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
+use App\Models\Domain;
 use App\Models\Offer;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OfferController extends Controller
@@ -13,7 +16,11 @@ class OfferController extends Controller
 
     public function index(Offer $offers){
         $offers=Offer::all();
-        return view('admin.offers.index',compact('offers'));
+        $userCount = User::count();
+        $cityCount = City::count();
+        $offerCount = Offer::count();
+        $domainCount = Domain::count();
+        return view('admin.offers.index',compact('offers','userCount','cityCount','offerCount','domainCount'));
     }
 
     public function updateStatus(Offer $offer){

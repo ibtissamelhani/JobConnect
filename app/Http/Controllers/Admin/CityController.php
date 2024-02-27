@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CityRequest;
 use App\Models\City;
+use App\Models\Domain;
+use App\Models\Offer;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CityController extends Controller
@@ -14,7 +17,11 @@ class CityController extends Controller
 
     public function index(){
         $cities=City::all();
-        return view('admin.cities.index',compact('cities'));
+        $userCount = User::count();
+        $cityCount = City::count();
+        $offerCount = Offer::count();
+        $domainCount = Domain::count();
+        return view('admin.cities.index',compact('cities','userCount','cityCount','offerCount','domainCount'));
     }
 
     public function create(){
