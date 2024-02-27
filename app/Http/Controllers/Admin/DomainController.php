@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DomainRequest;
+use App\Models\City;
 use App\Models\Domain;
+use App\Models\Offer;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DomainController extends Controller
@@ -14,7 +17,11 @@ class DomainController extends Controller
 
     public function index(){
         $domains=Domain::all();
-        return view('admin.domains.index',compact('domains'));
+        $userCount = User::count();
+        $cityCount = City::count();
+        $offerCount = Offer::count();
+        $domainCount = Domain::count();
+        return view('admin.domains.index',compact('domains','userCount','cityCount','offerCount','domainCount'));
     }
 
     public function create(){

@@ -24,7 +24,9 @@ use App\Models\Role;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+    
 
+    
 Route::get('/', [OfferController::class, 'index']);
 
 Route::get('/dashboard', function () {
@@ -53,11 +55,11 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::post('offerUser/store', [OfferUserController::class, 'store'])->name('offerUser.store');
 });
 
-
+Route::get('/offers/search',[OfferController::class,'search'])->name('offers.search');
 
 ////////// Admine routes /////////////////////////////////////////////////////////////////
 
-Route::prefix('admin')->name('admin.')->group(function(){
+Route::middleware('admin')->prefix('admin')->name('admin.')->group(function(){
 
     // display index pages
 
@@ -100,6 +102,11 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
     // delete offer
     Route::delete('/offers/delete/{offer}',[AdminOfferController::class,'delete'])->name('offers.delete');
+
+   
+
+    
+
 
 });
 
