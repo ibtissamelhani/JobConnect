@@ -2,7 +2,11 @@
 @section('title','Cities table')
 @section('content')
  <!-- PAGE CONTENT -->
+
+   
+
  <main class="flex-1 h-screen overflow-y-scroll overflow-x-hidden">
+
     <div class="md:hidden justify-between items-center bg-black text-white flex">
         <h1 class="text-2xl font-bold px-4">JobConnect</h1>
         <button @click="navOpen = !navOpen" class="btn p-4 focus:outline-none hover:bg-gray-800">

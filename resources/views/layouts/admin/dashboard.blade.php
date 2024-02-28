@@ -20,7 +20,7 @@
                             <div class="p-4">
                                 <!-- LOGO -->
                                 <a class="flex items-center text-white space-x-4" href="">
-                                    <svg class="w-7 h-7 bg-indigo-600 rounded-lg p-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                                    <img src="{{ asset('images/logo.png') }}" class="w-7 h-7 bg-white rounded-lg p-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"></img>
                                     <span class="text-2xl font-bold">JobConnect</span>
                                 </a>
             
@@ -79,12 +79,12 @@
                                     <img src="https://ui-avatars.com/api/?name=Habib+Mhamadi&size=128&background=ff4433&color=fff" class="w-7 w-7 rounded-full" alt="Profile">
                                     <h1>{{auth()->user()->name}}</h1>
                                 </div>
-                                <a onclick="event.preventDefault(); document.getElementById('logoutForm').submit()" href="#" class="hover:bg-gray-800 hover:text-white p-2 rounded">
-                                    <form id="logoutForm" action="{{ route('logout') }}" method="POST"></form>
+                             
+                                    <form id="logoutForm" action="{{ route('logout') }}" method="POST">
                                     @csrf
                                         <button type="submit"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>  </button>          
                                     </form>
-                                </a>
+                               
                             </div>
                         
                         </div>
@@ -98,6 +98,7 @@
              <script src="{{asset('js/alpine.js')}}" defer></script>
                 <!-- Flowbite JS -->
              <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+             
             </body>
         </html>
 

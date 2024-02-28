@@ -17,9 +17,13 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
        
-        if(!auth()->user()->roles->contains('id',1)){
-            abort(403);
+        if (auth()->check()) {
+            if (auth()->user()->roles->isNotEmpty()) {
+                if (auth()->user()->roles->contains('id', 1)) {
+                    return $next($request);
+                }
+            }
         }
-        return $next($request);
+        abort(403);
     }
 }
