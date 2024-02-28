@@ -31,6 +31,8 @@ class ProfileController extends Controller
             'email' => ['required', 'string', 'email', 'max:255'],
             'phone' => ['nullable', 'string', 'max:255'],
             'address' => ['nullable', 'string', 'max:255'],
+            'skill' => ['nullable', 'string', 'max:255'],
+            'position' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'profile' => ['image', 'mimes:jpeg,png,jpg'],
         ]);
