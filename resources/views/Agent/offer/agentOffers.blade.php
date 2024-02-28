@@ -36,6 +36,10 @@
                                         class="block px-4 py-2 text-md font-semibold text-yellow-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit
                                         offer</a>
                                 </li>
+                                <li>
+                                    <a href="{{ route('agent.requests',$userOffer->id) }}"
+                                        class="block px-4 py-2 text-md font-semibold text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Requests</a>
+                                </li>
 
                             </ul>
                             <div class="py-2">
@@ -70,7 +74,7 @@
                 </div>
                 <div class="flex justify-between mt-4">
                     <p class="text-gray-600">
-                        • {{ $userOffer->description }}
+                        • {!! $userOffer->description !!}
                     </p>
                     <div class="flex flex-col gap-4">
                         <span

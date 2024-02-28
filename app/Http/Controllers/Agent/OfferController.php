@@ -7,6 +7,7 @@ use App\Http\Requests\StoreOfferRequest;
 use App\Models\City;
 use App\Models\Domain;
 use App\Models\Offer;
+use App\Models\OfferUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -109,7 +110,9 @@ class OfferController extends Controller
      * get request of an offer.
      */
     public function getRequests(Offer $offer){
-        $requests = $offer->users()->withPivot('description','created_at','id')->get();
+        $requests = OfferUser::with('user')->whereHas('offer', function($query) use($offer){
+            $query->where('id',$offer->id);
+        })->get();
         return view('Agent.offer.requests', compact('requests'));
     }
 
