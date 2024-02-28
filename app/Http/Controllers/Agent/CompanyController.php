@@ -51,25 +51,33 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Company $company)
     {
-        //
+        $company->loadMedia('photos');
+        $photos = $company->getMedia('photos');
+        $numberOfUsers = $company->users()->count();
+        return view('Agent.company.show', compact('company','numberOfUsers','photos'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Company $company)
     {
-        //
+        return view('Agent.company.edit', compact('company'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Company $company)
     {
-        //
+        $company->update($request->all());
+        if ($request->hasFile('logo')) {
+            $company->clearMediaCollection('logos');
+            $company->addMediaFromRequest('logo')->toMediaCollection('logos');
+        }
+        return redirect()->route('agent.company.show',compact('company'));
     }
 
     /**
@@ -78,5 +86,15 @@ class CompanyController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    // add content to company profile
+
+    public function addContent(Request $request,Company $company){
+        if ($request->hasFile('photo')) {
+            $company->addMediaFromRequest('photo')->toMediaCollection('photos');
+        }
+        return redirect()->route('agent.company.show',compact('company'));
+    
     }
 }

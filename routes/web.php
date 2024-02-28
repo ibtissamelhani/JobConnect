@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Agent\OfferController ;
 use App\Http\Controllers\Agent\UserController;
 use App\Http\Controllers\User\OfferUserController;
+use App\Http\Controllers\User\UserController as UserUserController;
 use App\Models\Role;
 
 
@@ -33,7 +34,7 @@ Route::get('/dashboard', function () {
     return view('admin.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth','CheckBanned'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -42,16 +43,19 @@ Route::middleware('auth')->group(function () {
 // agent route 
 
 Route::prefix('agent')->name('agent.')->group(function () {
-    Route::resource('offers', OfferController::class);
-    Route::get('/agentOffers/{id}', [UserController::class, 'getAgentOffers'])->name('agentOffers');
+    Route::resource('offers', OfferController::class)->middleware(['CheckBanned']);
+    Route::get('/agentOffers/{id}', [UserController::class, 'getAgentOffers'])->name('agentOffers')->middleware(['auth','CheckBanned']);
+    Route::get('/requests/{offer}', [OfferController::class, 'getRequests'])->name('requests')->middleware(['auth','CheckBanned']);
     Route::resource('company', CompanyController::class);
+    Route::post('/companies/{company}/add-content', [CompanyController::class, 'addContent'])->name('addContent')->middleware(['auth','CheckBanned']);
 });
 
 
 // user route 
 
-Route::prefix('user')->name('user.')->group(function () {
+Route::prefix('user')->name('user.')->middleware(['auth','CheckBanned'])->group(function () {
     Route::get('offerUser/create/{offer}', [OfferUserController::class, 'create'])->name('offerUser.create');
+    Route::get('offerUser/getAppliedOffers/{user}', [UserUserController::class, 'getAppliedOffers'])->name('getAppliedOffers');
     Route::post('offerUser/store', [OfferUserController::class, 'store'])->name('offerUser.store');
 });
 
