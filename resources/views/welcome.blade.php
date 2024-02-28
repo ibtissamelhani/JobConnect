@@ -154,7 +154,7 @@
                     </div>
                     <div class="flex justify-between mt-4">
                         <p class="text-gray-600">
-                            • {{ $offer->description }}
+                            • {!! $offer->description !!}
                         </p>
                         <span
                             class="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-green-400">
